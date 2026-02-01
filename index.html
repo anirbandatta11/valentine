@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Be My Valentine ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ---------- BASE ---------- */
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: black;
@@ -16,169 +16,136 @@ body {
   overflow: hidden;
 }
 
-/* ---------- HIDDEN ---------- */
-.hidden { display: none; }
-
-/* ---------- HEART RAIN ---------- */
+/* ---------- HEARTS ---------- */
 .heart {
   position: fixed;
   top: -20px;
   font-size: 18px;
   animation: fall linear forwards;
-  opacity: 0.8;
   pointer-events: none;
 }
 
 @keyframes fall {
-  to {
-    transform: translateY(110vh);
-    opacity: 0;
-  }
+  to { transform: translateY(110vh); opacity: 0; }
 }
+
+/* ---------- COMMON ---------- */
+.hidden { display: none; }
 
 /* ---------- PAGE 1 ---------- */
 #page1 {
-  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 30px;
-  position: relative;
+  justify-content: center;
+  gap: 25px;
 }
 
-#rose-img {
+#rose {
   max-height: 45vh;
   max-width: 90vw;
-  object-fit: contain;
 }
 
-#question-box {
-  background: rgba(0,0,0,0.7);
-  padding: 28px 40px;
-  border-radius: 22px;
+h1 {
+  font-size: 24px;
   text-align: center;
 }
 
-#question-box h1 {
-  font-size: 26px;
-  margin-bottom: 22px;
-}
-
-/* ---------- BUTTONS ---------- */
-.buttons {
+/* ---------- BUTTON AREA ---------- */
+.button-area {
   position: relative;
-  width: 260px;
-  height: 70px;
-  margin: auto;
+  width: 280px;
+  height: 80px;
 }
 
 button {
-  border: none;
+  position: absolute;
   padding: 12px 26px;
   border-radius: 999px;
+  border: none;
   font-size: 16px;
   cursor: pointer;
-  position: absolute;
 }
 
-#yesBtn {
+#yes {
   background: #ff5c8a;
   color: white;
-  left: 120px;
+  left: 150px;
   box-shadow: 0 0 20px #ff5c8a;
 }
 
-#noBtn {
+#no {
   background: #333;
   color: white;
-  left: 40px;
+  left: 20px;
+  top: 20px;
 }
 
 /* ---------- PAGE 2 ---------- */
 #page2 {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-}
-
-#gallery {
-  position: absolute;
+  position: fixed;
   inset: 0;
+  background: black;
 }
 
 .photo {
   position: absolute;
   width: 220px;
-  border-radius: 20px;
+  border-radius: 18px;
   animation: float 7s ease-in-out infinite;
 }
 
 @keyframes float {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+  50% { transform: translateY(-14px); }
   100% { transform: translateY(0); }
 }
 
 .p1 { top: 8%; left: 10%; }
 .p2 { top: 8%; right: 10%; }
-.p3 { bottom: 12%; left: 8%; }
-.p4 { bottom: 12%; right: 8%; }
+.p3 { bottom: 12%; left: 10%; }
+.p4 { bottom: 12%; right: 10%; }
 .p5 { top: 35%; left: 50%; transform: translateX(-50%); }
 
-/* ---------- MESSAGE ---------- */
-#message-box {
+#message {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0,0,0,0.75);
   padding: 32px 40px;
-  border-radius: 26px;
+  border-radius: 24px;
   text-align: center;
   max-width: 460px;
-  box-shadow: 0 0 30px rgba(255,92,138,0.5);
-}
-
-#message-box p {
-  line-height: 1.6;
-  font-size: 16px;
-}
-
-#message-box .name {
-  color: #ff5c8a;
-  font-weight: bold;
+  box-shadow: 0 0 30px rgba(255,92,138,0.6);
 }
 </style>
 </head>
 
 <body>
 
-<!-- ---------- PAGE 1 ---------- -->
+<!-- PAGE 1 -->
 <div id="page1">
-  <img id="rose-img" src="black-rose.png" alt="Black Rose" />
+  <img id="rose" src="black-rose.png" alt="Black Rose">
 
-  <div id="question-box">
-    <h1>Will you be my Valentine forever, Madhubani? ❤️</h1>
-    <div class="buttons">
-      <button id="noBtn">NO</button>
-      <button id="yesBtn">YES</button>
-    </div>
+  <h1>Will you be my Valentine forever, Madhubani? ❤️</h1>
+
+  <div class="button-area">
+    <button id="no">NO</button>
+    <button id="yes">YES</button>
   </div>
 </div>
 
-<!-- ---------- PAGE 2 ---------- -->
+<!-- PAGE 2 -->
 <div id="page2" class="hidden">
-  <div id="gallery">
-    <img src="us1.jpg" class="photo p1">
-    <img src="us2.jpg" class="photo p2">
-    <img src="us3.jpg" class="photo p3">
-    <img src="us4.jpg" class="photo p4">
-    <img src="us5.jpg" class="photo p5">
-  </div>
+  <img src="us1.jpg" class="photo p1">
+  <img src="us2.jpg" class="photo p2">
+  <img src="us3.jpg" class="photo p3">
+  <img src="us4.jpg" class="photo p4">
+  <img src="us5.jpg" class="photo p5">
 
-  <div id="message-box">
+  <div id="message">
     <p>
       Somewhere between all our moments,<br>
       you became my home.<br><br>
@@ -187,7 +154,7 @@ button {
       laughter feels warmer,<br>
       and forever feels real ❤️<br><br>
 
-      <span class="name">Madhubani + Anirban = ♾️</span><br>
+      <b style="color:#ff5c8a;">Madhubani + Anirban = ♾️</b><br>
       আমাকে কখনো ছেড়ে যেও না…<br>
       my always, my forever.<br><br>
 
@@ -197,30 +164,30 @@ button {
 </div>
 
 <script>
-/* ---------- HEART RAIN ---------- */
+/* HEART RAIN */
 setInterval(() => {
   const h = document.createElement("div");
   h.className = "heart";
-  h.innerHTML = "❤️";
+  h.textContent = "❤️";
   h.style.left = Math.random() * 100 + "vw";
   h.style.animationDuration = (4 + Math.random() * 4) + "s";
   document.body.appendChild(h);
   setTimeout(() => h.remove(), 8000);
-}, 300);
+}, 350);
 
-/* ---------- NO BUTTON ESCAPE (VISIBLE ALWAYS) ---------- */
-const noBtn = document.getElementById("noBtn");
-const area = document.querySelector(".buttons");
+/* NO BUTTON ESCAPE */
+const no = document.getElementById("no");
+const area = document.querySelector(".button-area");
 
-noBtn.addEventListener("mouseenter", () => {
-  const maxX = area.clientWidth - noBtn.offsetWidth;
-  const maxY = area.clientHeight - noBtn.offsetHeight;
-  noBtn.style.left = Math.random() * maxX + "px";
-  noBtn.style.top = Math.random() * maxY + "px";
+no.addEventListener("mouseenter", () => {
+  const maxX = area.clientWidth - no.offsetWidth;
+  const maxY = area.clientHeight - no.offsetHeight;
+  no.style.left = Math.random() * maxX + "px";
+  no.style.top = Math.random() * maxY + "px";
 });
 
-/* ---------- YES CLICK ---------- */
-document.getElementById("yesBtn").onclick = () => {
+/* YES CLICK */
+document.getElementById("yes").onclick = () => {
   document.getElementById("page1").classList.add("hidden");
   document.getElementById("page2").classList.remove("hidden");
 };
