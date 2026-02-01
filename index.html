@@ -2,180 +2,212 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
+<title>Be My Valentine ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== BODY ===== */
 body {
   height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
   background: black;
   color: white;
 }
 
-/* ---------- PAGE 1 ---------- */
-#page1 {
-  position: relative;
-  height: 100vh;
+/* ===== PAGE WRAPPER ===== */
+.page {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at top, #111, #000);
-  overflow: hidden;
+  transition: opacity 1s ease;
 }
 
-.card {
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(12px);
-  border-radius: 28px;
-  padding: 40px 50px;
-  text-align: center;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.7);
-  z-index: 5;
-}
-
-.card img {
-  width: 220px;
-  margin-bottom: 22px;
-}
-
-#question {
-  font-size: 26px;
-  margin-bottom: 30px;
-  min-height: 70px;
-}
-
-.buttons {
-  position: relative;
-  height: 80px;
-}
-
-#yes {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-  padding: 14px 42px;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #ff4b7d, #ff758c);
-  color: white;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  transition: box-shadow 0.4s ease;
-}
-
-.glow {
-  box-shadow: 0 0 20px #ff5c8a, 0 0 40px #ff5c8a;
-}
-
-#no {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  padding: 14px 42px;
-  border-radius: 30px;
-  background: #222;
-  color: white;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-/* ---------- FALLING ROSES (PAGE 1 ONLY) ---------- */
-#roses {
-  position: absolute;
-  inset: 0;
+.hidden {
+  opacity: 0;
   pointer-events: none;
-  z-index: 1;
 }
 
-.fall {
+/* ===== ROSE FALL ANIMATION ===== */
+.rose {
   position: absolute;
+  top: -50px;
+  font-size: 18px;
   animation: fall linear infinite;
   opacity: 0.8;
 }
 
 @keyframes fall {
-  from { transform: translateY(-10vh); }
-  to { transform: translateY(110vh); }
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(110vh);
+  }
 }
 
-/* ---------- PAGE 2 ---------- */
-#page2 {
-  display: none; /* HARD HIDE */
+/* ===== CARD ===== */
+.card {
   position: relative;
-  height: 100vh;
-  overflow: hidden;
-  background: black;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 35px 40px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(255,0,80,0.25);
+  z-index: 5;
 }
 
-/* Gallery ONLY inside page2 */
-#page2 .gallery {
+/* ===== BOY IMAGE ===== */
+.card img {
+  width: 260px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(255,0,100,0.35);
+}
+
+/* ===== QUESTION ===== */
+h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+/* ===== BUTTONS ===== */
+.buttons {
+  position: relative;
+  height: 80px;
+}
+
+button {
   position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* YES BUTTON */
+#yesBtn {
+  left: 110px;
+  background: #ff4d79;
+  color: white;
+  box-shadow: 0 0 25px rgba(255,77,121,0.8);
   z-index: 1;
 }
 
-#page2 .gallery img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.75);
-}
-
-/* Hearts */
-#hearts {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+/* NO BUTTON (on top initially) */
+#noBtn {
+  left: 150px;
+  background: #222;
+  color: white;
   z-index: 2;
 }
 
-/* Message */
+/* ===== PAGE 2 ===== */
+#page2 {
+  background: black;
+  flex-direction: column;
+  padding: 30px;
+}
+
+/* PHOTO GRID */
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 18px;
+  width: 100%;
+  max-width: 1100px;
+  margin-bottom: 30px;
+}
+
+.photos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* MESSAGE CARD */
 .message {
-  position: relative;
-  z-index: 3;
-  max-width: 700px;
-  margin: auto;
-  top: 50%;
-  transform: translateY(-50%);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 28px;
+  max-width: 520px;
   text-align: center;
-  background: rgba(0,0,0,0.55);
-  padding: 35px 45px;
-  border-radius: 25px;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(255,0,100,0.25);
+}
+
+.message p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.message strong {
+  color: #ff5c8a;
+}
+
+/* HEARTS RAIN */
+.heart {
+  position: absolute;
+  color: pink;
+  font-size: 18px;
+  animation: fall linear infinite;
+  opacity: 0.9;
 }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
-<div id="page1">
-  <div id="roses"></div>
+<!-- ===== PAGE 1 ===== -->
+<div class="page" id="page1">
+
+  <!-- Falling black roses -->
+  <script>
+    for(let i=0;i<30;i++){
+      const r=document.createElement("div");
+      r.className="rose";
+      r.innerHTML="🥀";
+      r.style.left=Math.random()*100+"vw";
+      r.style.animationDuration=5+Math.random()*6+"s";
+      r.style.fontSize=14+Math.random()*14+"px";
+      document.body.appendChild(r);
+    }
+  </script>
 
   <div class="card">
-    <img src="blackrose.png">
-    <div id="question"></div>
+    <img src="black-rose.png" alt="Boy holding black rose">
+
+    <h1>Will you be my Valentine forever, Madhubani? ❤️</h1>
 
     <div class="buttons">
-      <button id="yes">YES</button>
-      <button id="no">NO</button>
+      <button id="yesBtn">YES</button>
+      <button id="noBtn">NO</button>
     </div>
   </div>
 </div>
 
-<!-- PAGE 2 -->
-<div id="page2">
-  <div class="gallery">
+<!-- ===== PAGE 2 ===== -->
+<div class="page hidden" id="page2">
+
+  <div class="photos">
     <img src="us1.jpg">
     <img src="us2.jpg">
     <img src="us3.jpg">
@@ -183,66 +215,44 @@ body {
     <img src="us5.jpg">
   </div>
 
-  <div id="hearts"></div>
-
   <div class="message">
-    <h2>From this moment, and every moment after… ❤️</h2>
+    <p>From this moment, and every moment after…</p>
+    <p><strong>you are my always, my forever ❤️</strong></p>
     <p>
-      You are my always, my forever.<br><br>
-      I choose you today.<br>
-      I’ll choose you tomorrow.<br>
-      And I’ll keep choosing you… forever.<br><br>
-      <strong>Madhubani + Anirban = ♾️</strong><br><br>
-      🌹 Happy Valentine’s Day 🌹
+      I choose you today,<br>
+      I’ll choose you tomorrow,<br>
+      and I’ll keep choosing you… forever ❤️
     </p>
+    <p><strong>(Madhubani + Anirban = ♾️)</strong></p>
+    <p>🌹 Happy Valentine’s Day 🌹</p>
   </div>
 </div>
 
 <script>
-/* Typing */
-const text = "Will you be my Valentine forever, Madhubani? ❤️";
-let i = 0;
-const q = document.getElementById("question");
-(function type() {
-  if (i < text.length) {
-    q.innerHTML += text.charAt(i++);
-    setTimeout(type, 60);
+/* ===== NO BUTTON FLY AWAY ===== */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseenter", () => {
+  const x = Math.random() * 250;
+  const y = Math.random() * 40;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+/* ===== YES CLICK ===== */
+document.getElementById("yesBtn").addEventListener("click", () => {
+  document.getElementById("page1").classList.add("hidden");
+  document.getElementById("page2").classList.remove("hidden");
+
+  // Hearts rain
+  for(let i=0;i<40;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=4+Math.random()*6+"s";
+    h.style.fontSize=14+Math.random()*18+"px";
+    document.body.appendChild(h);
   }
-})();
-
-/* NO escape */
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-noBtn.onmouseover = noBtn.onclick = () => {
-  noBtn.style.transform =
-    `translate(${Math.random()*300-150}px, ${Math.random()*200-100}px)`;
-  yesBtn.classList.add("glow");
-};
-
-/* YES */
-yesBtn.onclick = () => {
-  document.getElementById("page1").style.display = "none";
-  document.getElementById("page2").style.display = "block";
-  heartRain();
-};
-
-/* Roses */
-setInterval(() => drop("🥀", "roses"), 500);
-function drop(symbol, id) {
-  const el = document.createElement("div");
-  el.className = "fall";
-  el.innerHTML = symbol;
-  el.style.left = Math.random()*100 + "vw";
-  el.style.fontSize = "22px";
-  el.style.animationDuration = (6+Math.random()*6)+"s";
-  document.getElementById(id).appendChild(el);
-  setTimeout(()=>el.remove(),12000);
-}
-
-/* Hearts */
-function heartRain() {
-  setInterval(() => drop("❤️", "hearts"), 400);
-}
+});
 </script>
 
 </body>
