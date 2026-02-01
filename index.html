@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Be My Valentine ❤️</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  margin: 0;
   background: black;
   color: white;
+  font-family: "Segoe UI", sans-serif;
   overflow: hidden;
 }
 
 /* ---------- COMMON ---------- */
 .hidden { display: none; }
-
 .center {
   position: absolute;
   top: 50%;
@@ -28,108 +23,101 @@ body {
   transform: translate(-50%, -50%);
 }
 
-/* ---------- HEART RAIN ---------- */
+/* ---------- HEARTS ---------- */
 .heart {
   position: fixed;
-  top: -10px;
+  top: -20px;
   font-size: 18px;
-  animation: fall linear infinite;
-  opacity: 0.8;
+  animation: fall linear forwards;
 }
-
 @keyframes fall {
-  from { transform: translateY(-10px); }
-  to { transform: translateY(110vh); }
+  to { transform: translateY(110vh); opacity: 0; }
 }
 
 /* ---------- PAGE 1 ---------- */
 #page1 {
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle at top, #111, #000);
+  position: relative;
 }
 
 #rose-img {
-  width: 340px;
-  border-radius: 20px;
-  box-shadow: 0 0 40px rgba(255, 0, 80, 0.35);
+  max-height: 70vh;
+  display: block;
+  margin: auto;
 }
 
-.card {
-  background: rgba(0,0,0,0.75);
-  padding: 30px;
+#question-box {
+  background: rgba(0,0,0,0.7);
+  padding: 30px 40px;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 0 40px rgba(255, 0, 80, 0.3);
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
-.card h2 {
-  font-weight: 500;
+#question-box h1 {
+  font-size: 28px;
+  margin-bottom: 25px;
 }
 
 /* ---------- BUTTONS ---------- */
 .buttons {
-  margin-top: 25px;
   position: relative;
-  height: 60px;
+  width: 260px;
+  height: 80px;
+  margin: auto;
 }
 
 button {
+  padding: 12px 28px;
   border: none;
-  padding: 14px 36px;
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
+  position: absolute;
 }
 
 #yesBtn {
-  background: #ff4d6d;
+  background: hotpink;
   color: white;
-  box-shadow: 0 0 20px rgba(255,77,109,0.7);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
+  left: 90px;
+  top: 20px;
+  box-shadow: 0 0 20px hotpink;
 }
 
 #noBtn {
   background: #333;
   color: white;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
+  left: 0;
+  top: 20px;
 }
 
 /* ---------- PAGE 2 ---------- */
 #page2 {
   width: 100vw;
   height: 100vh;
-  background: black;
+  position: relative;
 }
 
-/* ---------- MESSAGE ---------- */
-#message {
-  background: rgba(0,0,0,0.75);
+.message-box {
+  background: rgba(0,0,0,0.65);
   padding: 35px;
   border-radius: 25px;
+  width: 420px;
   text-align: center;
-  width: 380px;
-  box-shadow: 0 0 45px rgba(255,77,109,0.5);
   z-index: 5;
 }
 
-#message p {
+.message-box p {
+  font-size: 18px;
   line-height: 1.6;
 }
 
 /* ---------- PHOTOS ---------- */
 .photo {
   position: absolute;
-  width: 190px;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255,255,255,0.2);
+  width: 200px;
+  border-radius: 18px;
   animation: float 7s ease-in-out infinite;
 }
 
@@ -139,63 +127,57 @@ button {
   100% { transform: translateY(0); }
 }
 
-.p1 { top: 10%; left: 10%; animation-duration: 7s; }
-.p2 { top: 10%; right: 10%; animation-duration: 6.5s; }
-.p3 { bottom: 15%; left: 15%; animation-duration: 7.5s; }
-.p4 { bottom: 15%; right: 15%; animation-duration: 6.8s; }
-.p5 { top: 45%; left: 5%; animation-duration: 7.2s; }
+.p1 { top: 10%; left: 12%; animation-duration: 7s; }
+.p2 { top: 10%; right: 12%; animation-duration: 6.5s; }
+.p3 { bottom: 10%; left: 15%; animation-duration: 7.5s; }
+.p4 { bottom: 10%; right: 15%; animation-duration: 6.8s; }
+.p5 { top: 50%; left: 5%; animation-duration: 7.2s; }
 
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .photo { width: 140px; }
+  .message-box { width: 90%; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- ---------- PAGE 1 ---------- -->
-<div id="page1">
-  <div class="center">
-    <img id="rose-img" src="black-rose.png" alt="Black Rose" />
+<!-- PAGE 1 -->
+<div id="page1" class="center">
+  <img id="rose-img" src="black-rose.png" alt="Black Rose">
 
-    <div class="card">
-      <h2>Hey Madhubani… 🌹</h2>
-      <p>Will you be my Valentine forever?</p>
-
-      <div class="buttons">
-        <button id="yesBtn">YES</button>
-        <button id="noBtn">NO</button>
-      </div>
+  <div id="question-box">
+    <h1>Will you be my Valentine forever, Madhubani? ❤️</h1>
+    <div class="buttons">
+      <button id="noBtn">NO</button>
+      <button id="yesBtn">YES</button>
     </div>
   </div>
 </div>
 
-<!-- ---------- PAGE 2 ---------- -->
+<!-- PAGE 2 -->
 <div id="page2" class="hidden">
+  <img src="us1.jpg" class="photo p1">
+  <img src="us2.jpg" class="photo p2">
+  <img src="us3.jpg" class="photo p3">
+  <img src="us4.jpg" class="photo p4">
+  <img src="us5.jpg" class="photo p5">
 
-  <!-- Photos -->
-  <img src="us1.jpg" class="photo p1" />
-  <img src="us2.jpg" class="photo p2" />
-  <img src="us3.jpg" class="photo p3" />
-  <img src="us4.jpg" class="photo p4" />
-  <img src="us5.jpg" class="photo p5" />
-
-  <!-- Message -->
-  <div id="message" class="center">
+  <div class="center message-box">
     <p>
       Somewhere between all our moments,<br>
-      you became my home. ❤️<br><br>
+      you became my home.<br><br>
 
       With you, love feels safe,<br>
       laughter feels warmer,<br>
-      and forever feels real.
-    </p>
+      and forever feels real. ❤️<br><br>
 
-    <p style="margin-top:15px;">
-      <strong>Madhubani + Anirban = ♾️</strong><br>
-      আমাকে কখনো ছেড়ে যেও না…<br>
-      <em>my always, my forever</em>
-    </p>
+      <b>Madhubani + Anirban = ♾️</b><br>
+      আমাকে কখনো ছেড়ে যেও না…please<br>
+      <i>my always, my forever.</i><br><br>
 
-    <p style="margin-top:15px;">
-      🌹 Happy Valentine’s Day 🌹
+      🌹 <b>Happy Valentine’s Day</b> 🌹
     </p>
   </div>
 </div>
@@ -203,12 +185,13 @@ button {
 <script>
 /* ---------- NO BUTTON ESCAPE ---------- */
 const noBtn = document.getElementById("noBtn");
+const btnArea = document.querySelector(".buttons");
 
-noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * (window.innerWidth - 120);
-  const y = Math.random() * (window.innerHeight - 60);
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
+noBtn.addEventListener("mouseenter", () => {
+  const maxX = btnArea.offsetWidth - noBtn.offsetWidth;
+  const maxY = btnArea.offsetHeight - noBtn.offsetHeight;
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
 });
 
 /* ---------- YES CLICK ---------- */
