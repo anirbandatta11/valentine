@@ -1,195 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Be My Valentine ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* { box-sizing: border-box; }
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  margin: 0;
   background: black;
   color: white;
-  font-family: "Segoe UI", sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
 }
 
 /* ---------- HEARTS ---------- */
 .heart {
   position: fixed;
-  top: -20px;
-  font-size: 18px;
-  animation: fall linear forwards;
+  color: #ff4d6d;
+  animation: fall linear infinite;
+  opacity: 0.8;
   pointer-events: none;
 }
-
 @keyframes fall {
-  to { transform: translateY(110vh); opacity: 0; }
+  from { transform: translateY(-10vh); }
+  to { transform: translateY(110vh); }
 }
 
-/* ---------- COMMON ---------- */
-.hidden { display: none; }
-
 /* ---------- PAGE 1 ---------- */
-#page1 {
+#page1, #page2 {
+  width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#page2 { display: none; }
+
+.page1-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 25px;
+  z-index: 10;
 }
 
-#rose {
+#rose-img {
   max-height: 45vh;
-  max-width: 90vw;
+  z-index: 5;
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 26px;
   text-align: center;
 }
 
-/* ---------- BUTTON AREA ---------- */
-.button-area {
+/* ---------- BUTTONS ---------- */
+.buttons {
   position: relative;
-  width: 280px;
-  height: 80px;
+  height: 60px;
+  width: 260px;
 }
 
 button {
   position: absolute;
-  padding: 12px 26px;
-  border-radius: 999px;
+  padding: 12px 28px;
+  border-radius: 30px;
   border: none;
   font-size: 16px;
   cursor: pointer;
 }
 
-#yes {
-  background: #ff5c8a;
+/* YES behind */
+#yesBtn {
+  background: #ff4d6d;
   color: white;
-  left: 150px;
-  box-shadow: 0 0 20px #ff5c8a;
+  left: 80px;
+  z-index: 1;
+  box-shadow: 0 0 20px #ff4d6d;
 }
 
-#no {
+/* NO on top initially */
+#noBtn {
   background: #333;
   color: white;
-  left: 20px;
-  top: 20px;
+  left: 90px;
+  z-index: 2;
 }
 
 /* ---------- PAGE 2 ---------- */
-#page2 {
-  position: fixed;
-  inset: 0;
-  background: black;
+.page2-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-.photo {
-  position: absolute;
-  width: 220px;
-  border-radius: 18px;
-  animation: float 7s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-  100% { transform: translateY(0); }
-}
-
-.p1 { top: 8%; left: 10%; }
-.p2 { top: 8%; right: 10%; }
-.p3 { bottom: 12%; left: 10%; }
-.p4 { bottom: 12%; right: 10%; }
-.p5 { top: 35%; left: 50%; transform: translateX(-50%); }
-
-#message {
+/* Message card */
+.message {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0,0,0,0.75);
-  padding: 32px 40px;
-  border-radius: 24px;
+  padding: 35px;
+  border-radius: 25px;
   text-align: center;
-  max-width: 460px;
-  box-shadow: 0 0 30px rgba(255,92,138,0.6);
+  max-width: 420px;
+  z-index: 10;
+  box-shadow: 0 0 40px #ff4d6d;
 }
+
+/* Photos */
+.photo {
+  position: absolute;
+  width: 180px;
+  border-radius: 18px;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* Positions */
+.p1 { top: 10%; left: 10%; animation-duration: 7s; }
+.p2 { top: 10%; right: 10%; animation-duration: 6.5s; }
+.p3 { bottom: 12%; left: 12%; animation-duration: 7.5s; }
+.p4 { bottom: 12%; right: 12%; animation-duration: 6.8s; }
+.p5 { top: 55%; right: 2%; animation-duration: 7.2s; }
 </style>
 </head>
 
 <body>
 
+<!-- HEARTS -->
+<script>
+for(let i=0;i<30;i++){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=5+Math.random()*5+"s";
+  h.style.fontSize=12+Math.random()*12+"px";
+  document.body.appendChild(h);
+}
+</script>
+
 <!-- PAGE 1 -->
 <div id="page1">
-  <img id="rose" src="black-rose.png" alt="Black Rose">
+  <div class="page1-content">
+    <img src="black-rose.png" id="rose-img">
+    <h1>Will you be my Valentine forever, Madhubani? ❤️</h1>
 
-  <h1>Will you be my Valentine forever, Madhubani? ❤️</h1>
-
-  <div class="button-area">
-    <button id="no">NO</button>
-    <button id="yes">YES</button>
+    <div class="buttons">
+      <button id="yesBtn">YES</button>
+      <button id="noBtn">NO</button>
+    </div>
   </div>
 </div>
 
 <!-- PAGE 2 -->
-<div id="page2" class="hidden">
-  <img src="us1.jpg" class="photo p1">
-  <img src="us2.jpg" class="photo p2">
-  <img src="us3.jpg" class="photo p3">
-  <img src="us4.jpg" class="photo p4">
-  <img src="us5.jpg" class="photo p5">
+<div id="page2">
+  <div class="page2-container">
 
-  <div id="message">
-    <p>
-      Somewhere between all our moments,<br>
-      you became my home.<br><br>
+    <img src="us1.jpg" class="photo p1">
+    <img src="us2.jpg" class="photo p2">
+    <img src="us3.jpg" class="photo p3">
+    <img src="us4.jpg" class="photo p4">
+    <img src="us5.jpg" class="photo p5">
 
-      With you, love feels safe,<br>
-      laughter feels warmer,<br>
-      and forever feels real ❤️<br><br>
+    <div class="message">
+      <p>
+        Somewhere between all our moments,<br>
+        you became my home.<br><br>
 
-      <b style="color:#ff5c8a;">Madhubani + Anirban = ♾️</b><br>
-      আমাকে কখনো ছেড়ে যেও না…<br>
-      my always, my forever.<br><br>
+        With you, love feels safe,<br>
+        laughter feels warmer,<br>
+        and forever feels real ❤️<br><br>
 
-      🌹 Happy Valentine’s Day 🌹
-    </p>
+        <strong>Madhubani + Anirban = ♾️</strong><br>
+        Ami jani j sometimes I make you angry <br>
+        faltu jhogra kori but please always stay with me <br>
+        আমাকে কখনো ছেড়ে যেও না…<br>
+        my always, my forever.<br><br>
+
+        🌹 Happy Valentine’s Day 🌹
+      </p>
+    </div>
   </div>
 </div>
 
 <script>
-/* HEART RAIN */
-setInterval(() => {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.textContent = "❤️";
-  h.style.left = Math.random() * 100 + "vw";
-  h.style.animationDuration = (4 + Math.random() * 4) + "s";
-  document.body.appendChild(h);
-  setTimeout(() => h.remove(), 8000);
-}, 350);
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
 
-/* NO BUTTON ESCAPE */
-const no = document.getElementById("no");
-const area = document.querySelector(".button-area");
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
 
-no.addEventListener("mouseenter", () => {
-  const maxX = area.clientWidth - no.offsetWidth;
-  const maxY = area.clientHeight - no.offsetHeight;
-  no.style.left = Math.random() * maxX + "px";
-  no.style.top = Math.random() * maxY + "px";
-});
+function moveNo(){
+  noBtn.style.left = Math.random()*200 + "px";
+  noBtn.style.top  = Math.random()*40 + "px";
+}
 
-/* YES CLICK */
-document.getElementById("yes").onclick = () => {
-  document.getElementById("page1").classList.add("hidden");
-  document.getElementById("page2").classList.remove("hidden");
+yesBtn.onclick = () => {
+  document.getElementById("page1").style.display="none";
+  document.getElementById("page2").style.display="flex";
 };
 </script>
 
