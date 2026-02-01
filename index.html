@@ -15,16 +15,15 @@ body {
   color: white;
 }
 
-/* ---------- SHARED ---------- */
-.hidden { display: none; }
-
 /* ---------- PAGE 1 ---------- */
 #page1 {
+  position: relative;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(circle at top, #111, #000);
+  overflow: hidden;
 }
 
 .card {
@@ -86,11 +85,12 @@ body {
   cursor: pointer;
 }
 
-/* ---------- FALLING ROSES ---------- */
-.roses, .hearts {
-  position: fixed;
+/* ---------- FALLING ROSES (PAGE 1 ONLY) ---------- */
+#roses {
+  position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 .fall {
@@ -106,48 +106,52 @@ body {
 
 /* ---------- PAGE 2 ---------- */
 #page2 {
+  display: none; /* HARD HIDE */
+  position: relative;
   height: 100vh;
+  overflow: hidden;
   background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.gallery {
+/* Gallery ONLY inside page2 */
+#page2 .gallery {
   position: absolute;
   inset: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 8px;
+  z-index: 1;
 }
 
-.gallery img {
+#page2 .gallery img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: brightness(0.75);
 }
 
+/* Hearts */
+#hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Message */
 .message {
   position: relative;
-  z-index: 5;
+  z-index: 3;
   max-width: 700px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
   text-align: center;
   background: rgba(0,0,0,0.55);
   padding: 35px 45px;
   border-radius: 25px;
   backdrop-filter: blur(10px);
-}
-
-.message h2 {
-  font-size: 28px;
-  margin-bottom: 15px;
-}
-
-.message p {
-  font-size: 18px;
-  line-height: 1.6;
 }
 </style>
 </head>
@@ -156,7 +160,7 @@ body {
 
 <!-- PAGE 1 -->
 <div id="page1">
-  <div class="roses" id="roses"></div>
+  <div id="roses"></div>
 
   <div class="card">
     <img src="blackrose.png">
@@ -170,7 +174,7 @@ body {
 </div>
 
 <!-- PAGE 2 -->
-<div id="page2" class="hidden">
+<div id="page2">
   <div class="gallery">
     <img src="us1.jpg">
     <img src="us2.jpg">
@@ -179,7 +183,7 @@ body {
     <img src="us5.jpg">
   </div>
 
-  <div class="hearts" id="hearts"></div>
+  <div id="hearts"></div>
 
   <div class="message">
     <h2>From this moment, and every moment after… ❤️</h2>
@@ -195,7 +199,7 @@ body {
 </div>
 
 <script>
-/* TYPING */
+/* Typing */
 const text = "Will you be my Valentine forever, Madhubani? ❤️";
 let i = 0;
 const q = document.getElementById("question");
@@ -206,7 +210,7 @@ const q = document.getElementById("question");
   }
 })();
 
-/* NO ESCAPE */
+/* NO escape */
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
 noBtn.onmouseover = noBtn.onclick = () => {
@@ -215,29 +219,29 @@ noBtn.onmouseover = noBtn.onclick = () => {
   yesBtn.classList.add("glow");
 };
 
-/* YES → PAGE 2 */
+/* YES */
 yesBtn.onclick = () => {
-  document.getElementById("page1").classList.add("hidden");
-  document.getElementById("page2").classList.remove("hidden");
+  document.getElementById("page1").style.display = "none";
+  document.getElementById("page2").style.display = "block";
   heartRain();
 };
 
-/* ROSES */
-setInterval(() => drop("🥀", "roses", 500), 500);
-function drop(symbol, container, delay) {
+/* Roses */
+setInterval(() => drop("🥀", "roses"), 500);
+function drop(symbol, id) {
   const el = document.createElement("div");
   el.className = "fall";
   el.innerHTML = symbol;
   el.style.left = Math.random()*100 + "vw";
   el.style.fontSize = "22px";
   el.style.animationDuration = (6+Math.random()*6)+"s";
-  document.getElementById(container).appendChild(el);
+  document.getElementById(id).appendChild(el);
   setTimeout(()=>el.remove(),12000);
 }
 
-/* HEARTS */
+/* Hearts */
 function heartRain() {
-  setInterval(() => drop("❤️", "hearts", 400), 400);
+  setInterval(() => drop("❤️", "hearts"), 400);
 }
 </script>
 
