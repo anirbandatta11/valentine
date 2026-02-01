@@ -1,11 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Test</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Be My Valentine ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Blurred background */
+.bg {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,154,158,0.7), rgba(250,208,196,0.7)),
+    url("me.jpg") center/cover no-repeat;
+  filter: blur(12px);
+  transform: scale(1.1);
+  z-index: -1;
+}
+
+/* Card */
+.card {
+  background: rgba(255,255,255,0.9);
+  padding: 35px 30px;
+  border-radius: 22px;
+  text-align: center;
+  max-width: 360px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+h1 {
+  color: #ff4b6e;
+}
+
+.buttons {
+  margin-top: 25px;
+  position: relative;
+  height: 120px;
+}
+
+button {
+  padding: 12px 26px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #ff4b6e;
+  color: white;
+}
+
+#no {
+  background: #ccc;
+  position: absolute;
+  left: 120px;
+  top: 60px;
+}
+
+/* Popup */
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,0.75), rgba(255,240,245,0.85)),
+    url("us1.jpg"), url("us2.jpg"), url("us3.jpg"), url("us4.jpg"), url("us5.jpg");
+  background-size: cover;
+  filter: blur(10px);
+}
+
+.popup-content {
+  position: relative;
+  background: rgba(255,255,255,0.9);
+  padding: 30px;
+  border-radius: 22px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.hearts span {
+  position: fixed;
+  bottom: -10px;
+  font-size: 22px;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+</style>
 </head>
-<body style="font-family: Arial; text-align:center; padding-top:50px;">
-  <h1>❤️ It Works ❤️</h1>
-  <p>If you can read this, GitHub Pages is rendering HTML correctly.</p>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="card">
+  <h1>Hey Madhubani 💘</h1>
+  <p>Will you be my Valentine forever?</p>
+
+  <div class="buttons">
+    <button id="yes" onclick="showPopup()">Yes ❤️</button>
+    <button id="no" onmouseover="moveNo()">No 🙈</button>
+  </div>
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-bg"></div>
+  <div class="popup-content">
+    <h2>
+      From this moment, and every moment after…<br>
+      <strong>you are my always, my forever ❤️</strong><br><br>
+
+      I choose you today,<br>
+      I’ll choose you tomorrow,<br>
+      and I’ll keep choosing you… forever ❤️<br><br>
+
+      <span style="font-size:16px;">
+        (Madhubani + Anirban = ♾️)
+      </span><br><br>
+
+      🌹 <strong>Happy Valentine’s Day</strong> 🌹
+    </h2>
+  </div>
+</div>
+
+<script>
+function moveNo() {
+  const btn = document.getElementById("no");
+  btn.style.left = Math.random() * 200 + "px";
+  btn.style.top = Math.random() * 80 + "px";
+}
+
+function showPopup() {
+  document.getElementById("popup").style.display = "flex";
+  for (let i = 0; i < 25; i++) {
+    const heart = document.createElement("span");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+}
+</script>
+
 </body>
 </html>
